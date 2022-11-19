@@ -1,7 +1,4 @@
-from pydantic import BaseModel
-
-from models.dto.label_dto import LabelDTO
-from models.dto.link_dto import LinkDTO
+from pydantic import BaseModel, validator
 
 
 class ArticleBaseDTO(BaseModel):
@@ -16,8 +13,18 @@ class ArticleCreateDTO(ArticleBaseDTO):
 
 class ArticleDTO(ArticleBaseDTO):
     id: int
-    labels: list[LabelDTO] = []
-    links: list[LinkDTO] = []
+    labels: list[str] = []
+    links: list[str] = []
+
+    @validator("labels", pre=True, each_item=True)
+    def get_label_value(cls, v):
+        value = v.label
+        return value
+
+    @validator("links", pre=True, each_item=True)
+    def get_link_value(cls, v):
+        value = v.link
+        return value
 
     class Config:
         orm_mode = True
