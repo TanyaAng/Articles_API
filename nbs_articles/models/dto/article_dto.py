@@ -11,10 +11,12 @@ class ArticleCreateDTO(ArticleBaseDTO):
     pass
 
 
-class ArticleDTO(ArticleBaseDTO):
-    id: int
-    labels: list[str] = []
-    links: list[str] = []
+class ArticleUpdateDTO(BaseModel):
+    date: str | None
+    url: str | None
+    body: str | None
+    labels: list[str] | None = []
+    links: list[str] | None = []
 
     @validator("labels", pre=True, each_item=True)
     def get_label_value(cls, v):
@@ -25,6 +27,10 @@ class ArticleDTO(ArticleBaseDTO):
     def get_link_value(cls, v):
         value = v.link
         return value
+
+
+class ArticleDTO(ArticleUpdateDTO):
+    id: int
 
     class Config:
         orm_mode = True

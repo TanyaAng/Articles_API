@@ -1,15 +1,16 @@
-import json
-
 import scrapy
 from scrapy.exceptions import CloseSpider
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from jsonschema import validate
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from sqlalchemy.orm import Session
 
 from articles import items
 from dao import repository
 from dao.repository import check_article_url_existence_in_db
+
 from models.dto.article_dto import ArticleCreateDTO
 from models.dto.label_dto import LabelCreateDTO
 from models.dto.link_dto import LinkCreateDTO
@@ -35,9 +36,9 @@ class ArticleSpider(scrapy.Spider):
     LABEL_CSS_SELECTOR = '.nbs-post .label--sm'
     BODY_CSS_SELECTOR = '.nbs-post .nbs-post__block'
     MIN_PAGE_NUMBER = 0
-    spider_iterators = 6
+    spider_iterators = 51
     PAGE_STEP_PAGINATION = 5
-    ARTICLES_MAX_COUNT = 2
+    ARTICLES_MAX_COUNT = 20
     count = 0
 
     def start_requests(self):
@@ -49,14 +50,14 @@ class ArticleSpider(scrapy.Spider):
         for page in range(self.MIN_PAGE_NUMBER, self.spider_iterators, self.PAGE_STEP_PAGINATION):
             url = self.start_urls[
                       0] + f'/?table_post-list_params=%7B"offset"%3A{page}%2C"filter"%3A%7B"lang"%3A"en"%7D%7D'
-            if self.count < self.ARTICLES_MAX_COUNT:
-                yield scrapy.Request(url, callback=self.parse_page, )
+            yield scrapy.Request(url, callback=self.parse_page)
 
     def parse_page(self, response):
         driver = webdriver.Chrome(self.CHROME_DRIVER_PATH)
         url = response.url
         driver.get(url)
-
+        # WebDriverWait(driver, timeout=10).until(
+        #         EC.presence_of_element_located((By.CLASS_NAME, self.PAGE_ARTICLES_CLASS_NAME)))
         archive_results = driver.find_elements(By.CLASS_NAME, self.PAGE_ARTICLES_CLASS_NAME)
         for page in archive_results:
             url = page.get_attribute('href')
@@ -79,6 +80,9 @@ class ArticleSpider(scrapy.Spider):
                 self.__validate_data_jsonschema(article_data)
                 self.create_article(article_data)
                 self.count += 1
+            # else:
+            #     driver.quit()
+            #     raise CloseSpider('article')
 
         except Exception:
             pass
