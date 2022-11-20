@@ -25,7 +25,12 @@
 
 
 ### About The Project
-  Data collection of NBS articles.
+  Python application for web crawling of dynamic web page, which generates content by doing asynchronous Javascript calls after page is loaded. The Scrapy spider implements inside a Selenuim WebDriver to handle the asynchronous JS calls and handles:
+  - collecting of NBS articles on multiple pages;
+  - validations of collected data;
+  - saving collected and valid articles to sqlite database;
+  With FastAPI framework are build endpoints of collected data. 
+  
 <p align="right"><a href="#top">back to top</a></p>
 
 #### Build With
@@ -40,22 +45,27 @@
 #### Installation
 1. Clone the repo
    ```sh
-   git clone https://github.com/TanyaAng/Automated_Shear_Walls_Calculations.git
+   https://github.com/TanyaAng/Articles_API.git
    ```
 2. Install all Python libraries
    ```sh
    pip install -r requirements.txt
    ```
 3. Make nbs_articles Root directory
+![Article_API_folders](https://user-images.githubusercontent.com/18015470/202911821-837805fb-272d-4861-b402-a7199c53a48c.PNG)
 
 <p align="right"><a href="#top">back to top</a></p>
 
 ### Usage
+1. Run Spider from terminal:
+   (venv) ..\nbs_articles> scrapy crawl article
+2. Run FastApi:
+![Article_API_FastAPI_config](https://user-images.githubusercontent.com/18015470/202912885-2809aed2-33e7-4412-a147-d7c9fbfc8b5f.png)
 
 
 <p align="right"><a href="#top">back to top</a></p>
 
-### Roadmap
+### API endpoints
 
 | Datapoint                | HTTP Method | Description                                   |
 | ------------------------ | ----------- | --------------------------------------------- |
