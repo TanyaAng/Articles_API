@@ -75,6 +75,14 @@ def update_article_by_id(article_id: int, body: ArticleUpdateDTO, db: Session):
     if not updated_article:
         return
 
+    labels_dto_as_str = body.__dict__["labels"]
+    if labels_dto_as_str:
+        map_to_label_entities(body, labels_dto_as_str)
+
+    links_dto_as_str = body.__dict__["links"]
+    if links_dto_as_str:
+        map_to_link_entities(body, links_dto_as_str)
+
     for key, value in body.__dict__.items():
         if value:
             setattr(updated_article, key, value)
@@ -112,3 +120,19 @@ def save_to_db(entity, db):
     db.add(entity)
     db.commit()
     db.refresh(entity)
+
+
+def map_to_link_entities(body, links_dto_as_str):
+    link_entities = []
+    for link in links_dto_as_str:
+        link_entity = LinkEntity(link=link)
+        link_entities.append(link_entity)
+    body.__dict__["links"] = link_entities
+
+
+def map_to_label_entities(body, labels_dto_as_str):
+    label_entities = []
+    for label in labels_dto_as_str:
+        label_entity = LabelEntity(label=label)
+        label_entities.append(label_entity)
+    body.__dict__["labels"] = label_entities

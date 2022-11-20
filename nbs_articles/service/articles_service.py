@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 
-from dao import repository
+from repository import repository
 from models.dto.article_dto import ArticleUpdateDTO
 
 
@@ -38,6 +38,9 @@ class ArticlesService:
     def update_article_by_id(self, article_id, body: ArticleUpdateDTO):
         if not self.is_digit(article_id):
             raise ValueError("Not valid id")
+
+        if not any(body.__dict__.values()):
+            raise AttributeError('Null value')
 
         if repository.check_article_url_existence_in_db(self.db, body.url):
             raise AttributeError('URL already exists')

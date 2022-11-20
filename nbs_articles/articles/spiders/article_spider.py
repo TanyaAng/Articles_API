@@ -5,8 +5,8 @@ from selenium.webdriver.common.by import By
 from sqlalchemy.orm import Session
 
 from articles import items
-from dao import repository
-from dao.repository import check_article_url_existence_in_db
+from repository import repository
+from repository.repository import check_article_url_existence_in_db
 from models.dto.article_dto import ArticleCreateDTO
 from models.dto.label_dto import LabelCreateDTO
 from models.dto.link_dto import LinkCreateDTO
