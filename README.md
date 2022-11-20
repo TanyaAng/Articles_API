@@ -70,12 +70,12 @@
 
 | Datapoint                | HTTP Method | Description                                   |
 | ------------------------ | ----------- | --------------------------------------------- |
-| /articles/               | GET         | get all crawled articles and their propertirs |
+| /articles/               | GET         | get all crawled articles and their properties |
 | /articles/?label={label} | GET         | get list of articles with the same label      |
 | /articles/?date={date}   | GET         | get list of articles from the date            |
 | /article/{article_id}    | GET         | get single article                            |
-| /article/{article_id}    | DELETE      | delete singel article                         |
-| /article/{article_id}    | PUT         | update singel article                         |
+| /article/{article_id}    | DELETE      | delete single article                         |
+| /article/{article_id}    | PUT         | update single article                         |
 
 
 <p align="right"><a href="#top">back to top</a></p>
