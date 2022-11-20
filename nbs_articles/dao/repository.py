@@ -27,7 +27,7 @@ def get_articles_by_date(db: Session, date: str):
     return articles.all() if articles is not None else []
 
 
-def check_article_existence(db: Session, article_url: str):
+def check_article_url_existence_in_db(db: Session, article_url: str):
     exist_article = db.query(ArticleEntity).filter(ArticleEntity.url == article_url)
     return True if exist_article is not None else False
 
