@@ -29,7 +29,7 @@
   - collecting of NBS articles on multiple pages;
   - validations of collected data;
   - saving collected and valid articles to sqlite database;
-  With FastAPI framework are build endpoints of collected data. 
+  - with FastAPI framework are build endpoints of collected data. 
   
 <p align="right"><a href="#top">back to top</a></p>
 
