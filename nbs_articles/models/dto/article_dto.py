@@ -20,11 +20,15 @@ class ArticleUpdateDTO(BaseModel):
 
     @validator("labels", pre=True, each_item=True)
     def get_label_value(cls, v):
+        if isinstance(v, str):
+            return v
         value = v.label
         return value
 
     @validator("links", pre=True, each_item=True)
     def get_link_value(cls, v):
+        if isinstance(v, str):
+            return v
         value = v.link
         return value
 

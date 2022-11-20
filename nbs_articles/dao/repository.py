@@ -29,8 +29,8 @@ def get_articles_by_date(date: str, db: Session):
 
 
 def check_article_url_existence_in_db(db: Session, article_url: str):
-    exist_article = db.query(ArticleEntity).filter(ArticleEntity.url == article_url)
-    return True if exist_article is not None else False
+    query_set = db.query(ArticleEntity).filter(ArticleEntity.url == article_url)
+    return True if query_set.first() is not None else False
 
 
 def create_article(article_dto: ArticleCreateDTO,

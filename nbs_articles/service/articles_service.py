@@ -39,6 +39,9 @@ class ArticlesService:
         if not self.is_digit(article_id):
             raise ValueError("Not valid id")
 
+        if repository.check_article_url_existence_in_db(self.db, body.url):
+            raise AttributeError('URL already exists')
+
         article_id = int(article_id)
         return repository.update_article_by_id(article_id, body, self.db)
 

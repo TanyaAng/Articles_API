@@ -11,6 +11,7 @@ SUCCESSFULLY_DELETED_MESSAGE = "Article has been successfully deleted"
 RESOURCE_NOT_FOUND_MESSAGE = "Resource not found"
 NOT_VALID_ID_MESSAGE = "Please enter valid id"
 NOT_VALID_QUERY_PARAMETER_MESSAGE = "Please use valid query parameters"
+URL_EXIST_MESSAGE = "URL already exists"
 
 database_connector.Base.metadata.create_all(bind=engine)
 
@@ -61,6 +62,8 @@ def update_article_by_id(article_id: str, body: ArticleUpdateDTO):
         updated_article = service.update_article_by_id(article_id, body)
     except ValueError:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=NOT_VALID_ID_MESSAGE)
+    except AttributeError:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=URL_EXIST_MESSAGE)
 
     if not updated_article:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=RESOURCE_NOT_FOUND_MESSAGE)
