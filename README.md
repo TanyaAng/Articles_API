@@ -51,7 +51,8 @@
    ```sh
    pip install -r requirements.txt
    ```
-3. Make nbs_articles Root directory
+3. Make nbs_articles root directory
+
 ![Article_API_folders](https://user-images.githubusercontent.com/18015470/202911821-837805fb-272d-4861-b402-a7199c53a48c.PNG)
 
 <p align="right"><a href="#top">back to top</a></p>
