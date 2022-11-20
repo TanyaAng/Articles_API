@@ -59,9 +59,10 @@
 
 ### Usage
 1. Run Spider from terminal:
-   (venv) ..\nbs_articles> scrapy crawl article
+ - (venv) ..\nbs_articles> scrapy crawl article
+   
 2. Run FastApi:
-![Article_API_FastAPI_config](https://user-images.githubusercontent.com/18015470/202912885-2809aed2-33e7-4412-a147-d7c9fbfc8b5f.png)
+ - ![Article_API_FastAPI_config](https://user-images.githubusercontent.com/18015470/202912885-2809aed2-33e7-4412-a147-d7c9fbfc8b5f.png)
 
 
 <p align="right"><a href="#top">back to top</a></p>
