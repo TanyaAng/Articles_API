@@ -95,4 +95,4 @@ Project Link: [github link]
 <p align="right"><a href="#top">back to top</a></p>
 
 [LinkedIn]: https://www.linkedin.com/in/tanya-angelova-44b03590/
-[github link]: https://github.com/TanyaAng/Automated_Shear_Walls_Calculations
+[github link]: https://github.com/TanyaAng/Articles_API
